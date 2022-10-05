@@ -1,41 +1,39 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+
 const talkers = require('./utils/fsUtils');
-const generateToken = require('./utils/token');
+const generateToken = require('./utils/generateToken');
+
+const emailValidate = require('./middleware/emailValidate');
+const passValidate = require('./middleware/passValidate');
+const talkerValidate = require('./middleware/talkerValidate');
 
 const app = express();
 app.use(bodyParser.json());
 
-const HTTP_OK_STATUS = 200;
 const PORT = '3000';
 
 // não remova esse endpoint, é para o avaliador funcionar
 app.get('/', (_request, response) => {
-  response.status(HTTP_OK_STATUS).send();
+  response.status(200).send();
 });
 
 app.get('/talker', async (_request, response) => {
   const data = await talkers();
-  response.status(HTTP_OK_STATUS).json(data);
+  response.status(200).json(data);
 });
 
-app.get('/talker/:id', async (request, response) => {
-  const { id } = await request.params;
-  const data = await talkers();
-  const talkerId = data.find((element) => element.id === Number(id));
-
-  if (talkerId) {
-    return response.status(HTTP_OK_STATUS).json(talkerId);
-  }
+app.get('/talker/:id', talkerValidate, (_request, response) => {
   response.status(404).send({ message: 'Pessoa palestrante não encontrada' });
 });
 
-app.post('/login', (request, response) => {
-  const login = request.body;
-  console.log(login);
-  return response.status(HTTP_OK_STATUS).json({ token: generateToken() });
+app.post('/login', emailValidate, passValidate, (_request, response) => {
+  const token = generateToken();
+  response.status(200).json({ token });
 });
 
 app.listen(PORT, () => {
   console.log('Online');
 });
+
+module.exports = app;
