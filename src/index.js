@@ -1,13 +1,17 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
-const talkers = require('./utils/fsUtils');
+const { readTalkers, writeTalker } = require('./utils/fsUtils');
 const generateToken = require('./utils/generateToken');
 
 const validateRoute = require('./middleware/talker/validateRoute');
 const validateEmail = require('./middleware/login/validateEmail');
 const validatePassword = require('./middleware/login/validatePassword');
 const validateToken = require('./middleware/talker/validateToken');
+const validateName = require('./middleware/talker/validateName');
+const validateAge = require('./middleware/talker/validateAge');
+const validateTalk = require('./middleware/talker/validateTalk');
+const validateRate = require('./middleware/talker/validateRate');
 
 const app = express();
 app.use(bodyParser.json());
@@ -21,7 +25,7 @@ app.get('/', (_request, response) => {
 });
 
 app.get('/talker', async (_request, response) => {
-  const data = await talkers();
+  const data = await readTalkers();
   response.status(HTTP_OK_STATUS).json(data);
 });
 
@@ -34,8 +38,18 @@ app.post('/login', validateEmail, validatePassword, (_request, response) => {
   response.status(HTTP_OK_STATUS).json({ token });
 });
 
-app.post('/talker', validateToken, (_resquest, response) => {
-  response.status(201).json({ message: 'Token autorizado' });
+app.post('/talker',
+validateToken, 
+validateName, 
+validateAge, 
+validateTalk, 
+validateRate,
+async (request, response) => {
+  const talker = request.body;
+  const data = await readTalkers();
+  const newTalker = { id: data.length + 1, ...talker };
+  await writeTalker([...data, newTalker]);
+  response.status(201).json(newTalker);
 });
 
 app.listen(PORT, () => {
