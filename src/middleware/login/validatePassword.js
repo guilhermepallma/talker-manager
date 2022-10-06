@@ -1,4 +1,4 @@
-const passValidate = async (request, response, next) => {
+const validatePassword = async (request, response, next) => {
   const { password } = await request.body;
 
   if (!password) {
@@ -10,4 +10,4 @@ const passValidate = async (request, response, next) => {
   next();
 };
 
-module.exports = passValidate;
+module.exports = validatePassword;

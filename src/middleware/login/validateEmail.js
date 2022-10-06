@@ -1,4 +1,4 @@
-const emailValidate = async (request, response, next) => {
+const validateEmail = async (request, response, next) => {
   const regexEmail = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i;
   const { email } = await request.body;
 
@@ -11,4 +11,4 @@ const emailValidate = async (request, response, next) => {
   next();
 };
 
-module.exports = emailValidate;
+module.exports = validateEmail;

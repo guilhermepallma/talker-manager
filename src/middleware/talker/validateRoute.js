@@ -1,6 +1,6 @@
-const talkers = require('../utils/fsUtils');
+const talkers = require('../../utils/fsUtils');
 
-const talkerValidate = async (request, response, next) => {
+const validateRoute = async (request, response, next) => {
   const { id } = await request.params;
   const data = await talkers();
   const talkerId = data.find((element) => element.id === Number(id));
@@ -11,4 +11,4 @@ const talkerValidate = async (request, response, next) => {
   next();
 };
 
-module.exports = talkerValidate;
+module.exports = validateRoute;
