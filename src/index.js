@@ -25,8 +25,8 @@ app.get('/', (_request, response) => {
 });
 
 app.get('/talker', async (_request, response) => {
-  const data = await readTalkers();
-  response.status(HTTP_OK_STATUS).json(data);
+  const allTalkers = await readTalkers();
+  response.status(HTTP_OK_STATUS).json(allTalkers);
 });
 
 app.get('/talker/:id', validateRoute, (_request, response) => {
@@ -46,10 +46,26 @@ validateTalk,
 validateRate,
 async (request, response) => {
   const talker = request.body;
-  const data = await readTalkers();
-  const newTalker = { id: data.length + 1, ...talker };
-  await writeTalker([...data, newTalker]);
+  const allTalkers = await readTalkers();
+  const newTalker = { id: allTalkers.length + 1, ...talker };
+  await writeTalker([...allTalkers, newTalker]);
   response.status(201).json(newTalker);
+});
+
+app.put('/talker/:id',
+validateToken, 
+validateName, 
+validateAge, 
+validateTalk, 
+validateRate,
+async (request, response) => {
+  const { id } = request.params;
+  const talker = { ...request.body };
+  const allTalkers = await readTalkers();
+  const index = allTalkers.findIndex((element) => element.id === Number(id));
+  allTalkers[index] = { ...allTalkers[index], ...talker };
+  await writeTalker(allTalkers);
+  response.status(HTTP_OK_STATUS).json(allTalkers[index]);
 });
 
 app.listen(PORT, () => {
