@@ -12,6 +12,7 @@ const validateName = require('./middleware/talker/validateName');
 const validateAge = require('./middleware/talker/validateAge');
 const validateTalk = require('./middleware/talker/validateTalk');
 const validateRate = require('./middleware/talker/validateRate');
+const validateQuery = require('./middleware/talker/validateQuery');
 
 const app = express();
 app.use(bodyParser.json());
@@ -24,9 +25,18 @@ app.get('/', (_request, response) => {
   response.status(HTTP_OK_STATUS).send();
 });
 
-app.get('/talker', async (_request, response) => {
+app.get('/talker', async (request, response) => {
+  const search = request.query;
+  console.log(search);
   const allTalkers = await readTalkers();
   response.status(HTTP_OK_STATUS).json(allTalkers);
+});
+
+app.get('/talker/search', validateToken, validateQuery, async (request, response) => {
+  const query = request.query.q;
+  const allTalkers = await readTalkers();
+  const queryFilter = allTalkers.filter((element) => element.name.includes(query));
+  response.status(HTTP_OK_STATUS).json(queryFilter);
 });
 
 app.get('/talker/:id', validateRoute, (_request, response) => {
