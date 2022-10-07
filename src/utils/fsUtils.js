@@ -21,7 +21,18 @@ const writeTalker = async (newTalker) => {
   }
 };
 
+const deleteTalker = async (id) => {
+  const allTalkers = await readTalkers();
+  const filterTalker = allTalkers.filter((talker) => talker.id !== id);
+  try {
+    fs.writeFile(pathTalker, JSON.stringify(filterTalker));
+  } catch (erro) {
+    console.error(`Erro ao escrever o arquivo: ${erro.path}`);
+  }
+};
+
 module.exports = {
   writeTalker,
   readTalkers,
+  deleteTalker,
 };

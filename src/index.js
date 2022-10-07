@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
-const { readTalkers, writeTalker } = require('./utils/fsUtils');
+const { readTalkers, writeTalker, deleteTalker } = require('./utils/fsUtils');
 const generateToken = require('./utils/generateToken');
 
 const validateRoute = require('./middleware/talker/validateRoute');
@@ -66,6 +66,12 @@ async (request, response) => {
   allTalkers[index] = { ...allTalkers[index], ...talker };
   await writeTalker(allTalkers);
   response.status(HTTP_OK_STATUS).json(allTalkers[index]);
+});
+
+app.delete('/talker/:id', validateToken, async (request, response) => {
+  const { id } = request.params;
+  await deleteTalker(Number(id));
+  response.status(204).end();
 });
 
 app.listen(PORT, () => {
