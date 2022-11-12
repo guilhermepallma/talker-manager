@@ -39,6 +39,12 @@ const createNewTalker = async (newTalker) => {
 };
 
 const editTalker = async ({ update, id }) => {
+  const error = validateTalker(update);
+
+  if (error.type) {
+    return error;
+  }
+
   const allTalkers = await readTalkers();
   const index = allTalkers.findIndex((element) => element.id === Number(id));
 
