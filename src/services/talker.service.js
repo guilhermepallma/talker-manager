@@ -4,9 +4,9 @@ const getAllTalkers = async () => {
   const allTalkers = await readTalkers();
 
   if (!allTalkers.length) {
-    return { code: 400, message: { message: 'Empty or not found file' } };
+    return { type: 400, message: { message: 'Empty or not found file' } };
   }
-  return { code: 200, message: allTalkers };
+  return { type: 200, message: allTalkers };
 };
 
 const getTalkerById = async (id) => {
@@ -15,9 +15,9 @@ const getTalkerById = async (id) => {
   const filterTalker = allTalkers.filter((talkerId) => talkerId.id === Number(id));
 
   if (!filterTalker.length) {
-    return { code: 404, message: { message: 'Talker not found' } };
+    return { type: 404, message: { message: 'Talker not found' } };
   }
-  return { code: 200, message: filterTalker };
+  return { type: 200, message: filterTalker };
 };
 
 getTalkerById();
