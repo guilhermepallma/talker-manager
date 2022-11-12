@@ -1,4 +1,5 @@
-const { readTalkers } = require('../utils/fsUtils');
+const { readTalkers, writeTalker } = require('../utils/fsUtils');
+const { validateTalker } = require('./schemas/validade.values');
 
 const getAllTalkers = async () => {
   const allTalkers = await readTalkers();
@@ -20,9 +21,37 @@ const getTalkerById = async (id) => {
   return { type: 200, message: filterTalker };
 };
 
-getTalkerById();
+const createNewTalker = async (newTalker) => {
+  const error = validateTalker(newTalker);
+
+  if (error.type) {
+    return error;
+  }
+  
+  const allTalkers = await readTalkers();
+  const newRegister = { id: allTalkers.length + 1, ...newTalker };
+  
+  allTalkers.push(newRegister);
+
+  await writeTalker(allTalkers);
+
+  return { type: 201, message: newRegister };
+};
+
+const editTalker = async ({ update, id }) => {
+  const allTalkers = await readTalkers();
+  const index = allTalkers.findIndex((element) => element.id === Number(id));
+
+  allTalkers[index] = { ...allTalkers[index], ...update };
+
+  await writeTalker(allTalkers);
+
+  return { type: 201, message: allTalkers[index] };
+};
 
 module.exports = {
   getAllTalkers,
   getTalkerById,
+  createNewTalker,
+  editTalker,
 };

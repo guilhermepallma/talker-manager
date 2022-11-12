@@ -11,7 +11,24 @@ const talkersById = async (req, res) => {
   return res.status(type).json(message);
 };
 
+const registerNewTalker = async (req, res) => {
+  const newTalker = req.body;
+  const { type, message } = await talkerService.createNewTalker(newTalker);
+  return res.status(type).json(message);
+};
+
+const updateTalker = async (req, res) => {
+  const { id } = req.params;
+  const update = req.body;
+
+  const { type, message } = await talkerService.editTalker({ update, id });
+
+  return res.status(type).json(message);
+};
+
 module.exports = {
   allTalkers,
   talkersById,
+  registerNewTalker,
+  updateTalker,
 };

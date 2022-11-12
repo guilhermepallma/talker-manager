@@ -1,19 +1,6 @@
 const express = require('express');
 const routes = require('./routes/routes');
 
-// const { readTalkers, writeTalker, deleteTalker } = require('./utils/fsUtils');
-// const generateToken = require('./utils/generateToken');
-
-// const validateRoute = require('./middleware/talker/validateRoute');
-// const validateEmail = require('./middleware/login/validateEmail');
-// const validatePassword = require('./middleware/login/validatePassword');
-// const validateToken = require('./middleware/talker/validateToken');
-// const validateName = require('./middleware/talker/validateName');
-// const validateAge = require('./middleware/talker/validateAge');
-// const validateTalk = require('./middleware/talker/validateTalk');
-// const validateRate = require('./middleware/talker/validateRate');
-// const validateQuery = require('./middleware/talker/validateQuery');
-
 const app = express();
 
 app.use(express.json());

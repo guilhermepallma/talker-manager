@@ -15,4 +15,4 @@ const loginAuthService = async ({ email, password }) => {
 
 module.exports = { 
   loginAuthService,
- };
+};
