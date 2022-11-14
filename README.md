@@ -20,6 +20,26 @@ Criar uma API CRUD (Criar, Ler, Atualizar e Deleta) de palestrantes, que possui 
 
 Na elaboração da API RESTful, tentei organizar o projeto com a arquitetura MSC (Model-Service-Controller), mesmo não existindo uma model, já que os dados armazenados da API fica em arquivo JSON.
 
+## ⚙️ Execução
+
+Para executar a aplicação inicie realizando o clone deste repositório com o comando abaixo.
+
+    git clone git@github.com:guilhermepallma/talker-manager.git
+
+Navegue até a raíz do projeto.
+
+    cd talker-manager/
+
+  Na raíz do projeto execute o comando abaixo para instalar as dependências.
+
+    npm install
+
+  Para subir o servidor com o <strong>nodemon</strong> utilize o comando abaixo no terminal dentro do projeto.
+    
+    npm run dev
+    
+</details>
+
 ## Documentação da API
 
 ### Retorna o token necessário para acessar os demais endpoints da API. 
