@@ -6,7 +6,7 @@ O projeto permitiu colocar em prática o que aprendi sobre Node.js, Express.js, 
 
 ## Objetivo
 
-Criar uma API CRUD (Criar, Ler, Atualizar e Deleta) de palestrantes, que possui um token necessário para acessar os demais endpoints que permite o usuário interagir, e as informações precisa ser gravada em um arquivo JSON, usando os Core Modules do Node.js.
+Criar uma API CRUD (Criar, Ler, Atualizar e Deleta) de palestrantes, que possui um token necessário para acessar os demais endpoints que permite o usuário interagir. As informações precisa ser gravada em um arquivo JSON, usando os Core Modules do Node.js.
 
 ## Tecnologias e Ferramentas
 <div>
