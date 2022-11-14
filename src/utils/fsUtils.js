@@ -5,9 +5,9 @@ const pathTalker = path.resolve(__dirname, '..', 'talker.json');
 
 const readTalkers = async () => {
   try {
-  const data = await fs.readFile(pathTalker, 'utf-8');
-  const response = JSON.parse(data);
-  return response;
+  const talkersFile = await fs.readFile(pathTalker, 'utf-8');
+  const data = JSON.parse(talkersFile);
+  return data;
   } catch (erro) {
     console.error(`Erro ao ler o arquivo: ${erro.path}`);
   }
@@ -32,7 +32,7 @@ const deleteTalker = async (id) => {
 };
 
 module.exports = {
-  writeTalker,
   readTalkers,
+  writeTalker,
   deleteTalker,
 };
