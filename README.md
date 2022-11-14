@@ -22,6 +22,9 @@ Na elaboração da API RESTful, tentei organizar o projeto com a arquitetura MSC
 
 ## ⚙️ Execução
 
+<details>
+  <summary>Clique para expandir!</summary>
+
 Para executar a aplicação inicie realizando o clone deste repositório com o comando abaixo.
 
     git clone git@github.com:guilhermepallma/talker-manager.git
@@ -41,6 +44,9 @@ Navegue até a raíz do projeto.
 </details>
 
 ## Documentação da API
+
+<details>
+  <summary>Clique para expandir!</summary>
 
 ### Retorna o token necessário para acessar os demais endpoints da API. 
 
@@ -132,5 +138,7 @@ Navegue até a raíz do projeto.
 | `id`      | `number` | **Obrigatório**. O ID do palestrante que deseja **DELETAR**. |
 
 ##
+
+</details>
 
 Desenvolvido por [Guilherme Palma](www.linkedin.com/in/guilhermepallma) © 2022.
