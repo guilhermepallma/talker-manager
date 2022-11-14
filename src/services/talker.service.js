@@ -10,6 +10,16 @@ const getAllTalkers = async () => {
   return { type: 200, message: allTalkers };
 };
 
+const getTalkerByQuery = async (query) => {
+  const allTalkers = await readTalkers();
+  const queryFilter = await allTalkers.filter((talker) => talker.name.includes(query));
+
+  if (!queryFilter.length) {
+    return { type: 200, message: allTalkers };
+  }
+  return { type: 200, message: queryFilter };
+};
+
 const getTalkerById = async (id) => {
   const allTalkers = await readTalkers();
   // filter retorna id string, precisa ser convertido para number ai sim /:id funciona.
@@ -69,6 +79,7 @@ const deleteTalkerById = async (id) => {
 module.exports = {
   getAllTalkers,
   getTalkerById,
+  getTalkerByQuery,
   createNewTalker,
   editTalker,
   deleteTalkerById,

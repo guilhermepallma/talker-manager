@@ -5,6 +5,8 @@ const talkerRoutes = express.Router();
 
 talkerRoutes.get('/', talkerController.allTalkers);
 
+talkerRoutes.get('/search', talkerController.talkersByQuery);
+
 talkerRoutes.get('/:id', talkerController.talkersById);
 
 talkerRoutes.post('/', talkerController.registerNewTalker);

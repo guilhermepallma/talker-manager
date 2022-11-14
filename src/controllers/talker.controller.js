@@ -13,6 +13,13 @@ const talkersById = async (req, res) => {
   return res.status(type).json(message);
 };
 
+const talkersByQuery = async (req, res) => {
+  const query = req.query.q;
+  const { type, message } = await talkerService.getTalkerByQuery(query);
+
+  return res.status(type).json(message);
+};
+
 const registerNewTalker = async (req, res) => {
   const newTalker = req.body;
   const { type, message } = await talkerService.createNewTalker(newTalker);
@@ -39,6 +46,7 @@ const deleteTalker = async (req, res) => {
 module.exports = {
   allTalkers,
   talkersById,
+  talkersByQuery,
   registerNewTalker,
   updateTalker,
   deleteTalker,

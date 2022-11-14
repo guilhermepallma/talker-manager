@@ -6,7 +6,9 @@ const talkerRoutes = require('./talker.route');
 const routes = express.Router();
 
 routes.use('/login', loginRoutes);
+
 routes.use(authToken);
+
 routes.use('/talker', talkerRoutes);
 
 module.exports = routes; 
