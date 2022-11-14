@@ -6,7 +6,7 @@ const key = 'secret-password';
 const createToken = (data) => {
   const token = jwt.sign({ data }, key, {
     algorithm: 'HS256',
-    expiresIn: '1d',
+    expiresIn: '7d',
   });
   return token;
 };

@@ -1,4 +1,4 @@
-const { readTalkers, writeTalker } = require('../utils/fsUtils');
+const { readTalkers, writeTalker, deleteTalker } = require('../utils/fsUtils');
 const { validateTalker } = require('./schemas/validade.values');
 
 const getAllTalkers = async () => {
@@ -55,9 +55,21 @@ const editTalker = async ({ update, id }) => {
   return { type: 201, message: allTalkers[index] };
 };
 
+const deleteTalkerById = async (id) => {
+  const allTalkers = await readTalkers();
+
+  const filterTalkerById = allTalkers.filter((talkerId) => talkerId.id === Number(id));
+
+  if (!filterTalkerById.length) {
+    return { type: 404, message: { message: 'Talker not found' } };
+  } 
+    await deleteTalker(id);
+};
+
 module.exports = {
   getAllTalkers,
   getTalkerById,
   createNewTalker,
   editTalker,
+  deleteTalkerById,
 };
