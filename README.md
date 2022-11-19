@@ -2,7 +2,7 @@
 # Talker Manager
 
 Talker Manager foi proposto como uma atividade de aprimoramento dos meus estudos sobre desenvolvimento de API. 
-O projeto permitiu colocar em prática o que aprendi sobre Node.js, Express.js, JWT e Protocolos HTTP durante o módulo Back-end na [Trybe](https://www.betrybe.com/).
+O projeto me permitiu colocar em prática o que aprendi sobre Node.js, Express.js, JWT e Protocolos HTTP durante o módulo Back-end na [Trybe](https://www.betrybe.com/).
 
 ## Objetivo
 
